@@ -161,7 +161,14 @@ void setup(){
   lv_label_set_align(label, LV_LABEL_ALIGN_CENTER);
   lv_label_set_long_mode(label, LV_LABEL_LONG_EXPAND); 
   
-  lv_obj_align(label, NULL, LV_ALIGN_IN_TOP_MID, 0, 10);
+  lv_obj_align(label, NULL, LV_ALIGN_IN_TOP_MID, -10, 10);
+
+  lv_obj_t * label2 = lv_label_create(tab1, NULL);
+  lv_label_set_text(label2, "Distance:");
+  lv_label_set_align(label2, LV_LABEL_ALIGN_CENTER);
+  lv_label_set_long_mode(label2, LV_LABEL_LONG_EXPAND); 
+  
+  lv_obj_align(label2, NULL, LV_ALIGN_IN_TOP_LEFT, 5, 10);
 
 }
 
