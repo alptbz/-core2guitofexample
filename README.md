@@ -7,3 +7,4 @@ The M5Stack Core2 - LVGL + TOF Distance Sensor Example is a project that showcas
  - Tof Sensor Example: https://github.com/pololu/vl53l0x-arduino/blob/master/examples/Continuous/Continuous.ino
  - Used LVGL Example: https://github.com/mhaberler/m5core2-lvgl-demo
  - LVGL 7.x Docs: https://docs.lvgl.io/7.11/
+ - Original chinese source: https://macsbug.wordpress.com/2021/06/18/how-to-run-lvgl-on-m5stack-esp32/
