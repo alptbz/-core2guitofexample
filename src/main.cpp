@@ -24,6 +24,28 @@ lv_obj_t * label;
 
 VL53L0X sensor;
 
+lv_obj_t * mbox1;
+
+static void event_handler_msg_box(lv_obj_t * obj, lv_event_t event)
+{
+    if(event == LV_EVENT_VALUE_CHANGED) {
+        printf("Button: %s\n", lv_msgbox_get_active_btn_text(obj));
+    }
+    lv_msgbox_start_auto_close(mbox1, 10);
+}
+
+void lv_ex_msgbox_1(void)
+{
+    static const char * btns[] ={"Apply", "Close", ""};
+
+    mbox1 = lv_msgbox_create(lv_scr_act(), NULL);
+    lv_msgbox_set_text(mbox1, "A message box with two buttons.");
+    lv_msgbox_add_btns(mbox1, btns);
+    lv_obj_set_width(mbox1, 200);
+    lv_obj_set_event_cb(mbox1, event_handler_msg_box);
+    lv_obj_align(mbox1, NULL, LV_ALIGN_CENTER, 0, 0); /*Align to the corner*/
+}
+
 //=====================================================================
 /*Read the touchpad*/
 bool my_touchpad_read(lv_indev_drv_t * indev_driver,
@@ -53,6 +75,15 @@ void my_disp_flush(lv_disp_drv_t *disp,
   tft.endWrite();
   lv_disp_flush_ready(disp);
 }
+
+static void event_handler(lv_obj_t * obj, lv_event_t event)
+{
+    if(event == LV_EVENT_CLICKED) {
+        lv_ex_msgbox_1();
+    }
+}
+
+
 //=====================================================================
 void setup(){
   M5.begin(true, true, true, true);
@@ -146,10 +177,11 @@ void setup(){
   lv_obj_t * btn1 = lv_btn_create(tab1, NULL);
   lv_obj_align(    btn1, NULL, LV_ALIGN_IN_BOTTOM_RIGHT, -15, -15);
   lv_obj_add_style(btn1, LV_BTN_PART_MAIN, &style_gum);
+  lv_obj_set_event_cb(btn1, event_handler);
   
   //-------------------------------------------------------------------
   /*Instead of creating a label add a values string*/
-  lv_obj_set_style_local_value_str(btn1, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, "Gum");
+  lv_obj_set_style_local_value_str(btn1, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, "Show MsgBox");
   
   //-------------------------------------------------------------------
   
